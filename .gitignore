@@ -1,0 +1,6 @@
+# Build results
+[Bb]in/
+[Oo]bj/
+
+# macOS system files
+.DS_Store
