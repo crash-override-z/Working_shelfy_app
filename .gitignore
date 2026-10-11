@@ -429,3 +429,8 @@ FodyWeavers.xsd
 
 # macOS system files
 .DS_Store
+
+# Local SQLite databases and journal files
+*.db
+*.db-shm
+*.db-wal
