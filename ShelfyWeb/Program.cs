@@ -1,9 +1,19 @@
+using Microsoft.EntityFrameworkCore;
+using Shelfy.Data;
+
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddDbContext<ShelfyDbContext>(options =>
+   options.UseSqlite($"Data Source={ShelfyDbContext.GetDatabasePath()}"));
 
 // Add services to the container.
 builder.Services.AddRazorPages();
 
 var app = builder.Build();
+using (var scope = app.Services.CreateScope())
+{
+    var db = scope.ServiceProvider.GetRequiredService<ShelfyDbContext>();
+    db.Database.EnsureCreated();
+}
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
@@ -21,6 +31,5 @@ app.UseAuthorization();
 
 app.UseStaticFiles();
 app.MapRazorPages();
-   app.MapRazorPages();
 
 app.Run();

@@ -8,5 +8,8 @@ namespace Shelfy.Models
         public string PickupSlot { get; set; } = string.Empty;
         public decimal TotalPrice { get; set; }
         public bool IsConfirmed { get; set; }
+
+        public string Status { get; set; } = "Pending";
+        public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
     }
 }

@@ -1,60 +1,65 @@
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using System.Globalization;
-using System.IO;
-using System.Collections.Generic;
+using Microsoft.EntityFrameworkCore;
+using Shelfy.Data;
+using Shelfy.Models;
 
 namespace ShelfyWeb.Pages
 {
     public class AdminModel : PageModel
     {
-        public List<string> LiveOrders { get; set; } = new();
-        public decimal TotalRevenue { get; set; }
+        private readonly ShelfyDbContext _db;
 
-        public void OnGet()
+        public AdminModel(ShelfyDbContext db)
         {
-            string csvPath = GetOrdersFilePath();
-
-            if (System.IO.File.Exists(csvPath))
-            {
-                var lines = System.IO.File.ReadAllLines(csvPath);
-                foreach (var line in lines)
-                {
-                    LiveOrders.Add(line);
-
-                    int lastComma = line.LastIndexOf(',');
-                    if (lastComma >= 0
-                        && decimal.TryParse(
-                            line[(lastComma + 1)..],
-                            NumberStyles.Number,
-                            CultureInfo.InvariantCulture,
-                            out decimal orderTotal))
-                    {
-                        TotalRevenue += orderTotal;
-                    }
-                }
-            }
-            else
-            {
-                LiveOrders.Add("Waiting for orders... csv file not found at path.");
-            }
+            _db = db;
         }
 
-        private string GetOrdersFilePath()
+        public List<Order> Orders { get; private set; } = new();
+
+        public decimal TotalRevenue => Orders
+            .Where(order => order.Status != "Cancelled")
+            .Sum(order => order.TotalPrice);
+
+        public static readonly string[] StatusOptions =
         {
-            DirectoryInfo? directory = new DirectoryInfo(Directory.GetCurrentDirectory());
+            "Pending",
+            "Preparing",
+            "Ready",
+            "Completed",
+            "Cancelled"
+        };
 
-            while (directory != null)
+        public async Task OnGetAsync()
+        {
+            await LoadOrdersAsync();
+        }
+
+        public async Task<IActionResult> OnPostUpdateStatusAsync(int id, string status)
+        {
+            if (!StatusOptions.Contains(status, StringComparer.Ordinal))
             {
-                if (System.IO.File.Exists(Path.Combine(directory.FullName, "Shelfy.slnx"))
-                    || Directory.Exists(Path.Combine(directory.FullName, "ShelfyWeb")))
-                {
-                    return Path.Combine(directory.FullName, "orders.csv");
-                }
-
-                directory = directory.Parent;
+                return BadRequest();
             }
 
-            return Path.GetFullPath(Path.Combine(Directory.GetCurrentDirectory(), "..", "orders.csv"));
+            var order = await _db.Orders.FindAsync(id);
+            if (order == null)
+            {
+                return NotFound();
+            }
+
+            order.Status = status;
+            await _db.SaveChangesAsync();
+
+            return RedirectToPage();
+        }
+
+        private async Task LoadOrdersAsync()
+        {
+            Orders = await _db.Orders
+                .OrderByDescending(order => order.CreatedAt)
+                .ThenByDescending(order => order.Id)
+                .ToListAsync();
         }
     }
 }
