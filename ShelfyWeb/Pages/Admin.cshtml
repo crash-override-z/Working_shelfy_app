@@ -1,0 +1,22 @@
+﻿@page
+@model ShelfyWeb.Pages.AdminModel
+@{
+    ViewData["Title"] = "Admin Dashboard";
+}
+
+<div class="container mt-4">
+    <h1 class="mb-4">=== STORE-SIDE LIVE ORDERS (WEB ADMIN) ===</h1>
+    
+    <div class="list-group mb-4">
+        @foreach (var ticket in Model.LiveOrders)
+        {
+            <div class="list-group-item font-monospace">
+                @ticket
+            </div>
+        }
+    </div>
+
+    <div class="alert alert-success">
+        <strong>TOTAL PLATFORM REVENUE:</strong> $@Model.TotalRevenue
+    </div>
+</div>

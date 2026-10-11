@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="Shelfy.csproj" />
+  <Project Path="ShelfyWeb/ShelfyWeb.csproj" />
+</Solution>
