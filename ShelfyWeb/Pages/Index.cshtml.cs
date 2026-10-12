@@ -62,7 +62,7 @@ public class IndexModel : PageModel
 
     public async Task<IActionResult> OnPostAsync()
     {
-        CustomerName = CustomerName.Trim();
+        CustomerName = CustomerName?.Trim() ?? string.Empty;
 
         if (string.IsNullOrWhiteSpace(CustomerName))
         {

@@ -16,9 +16,13 @@
             <strong>@Model.ConfirmationTicketId</strong>.
         </div>
     }
-
-    <form method="post">
-        <div asp-validation-summary="All" class="alert alert-danger" role="alert"></div>
+<form method="post">
+    @if (ViewData.ModelState.Values
+    .SelectMany(entry => entry.Errors)
+    .Any(error => !string.IsNullOrWhiteSpace(error.ErrorMessage)))
+{
+    <div asp-validation-summary="All" class="alert alert-danger" role="alert"></div>
+}
 
         <div class="mb-4">
             <label asp-for="CustomerName" class="form-label">Your name</label>

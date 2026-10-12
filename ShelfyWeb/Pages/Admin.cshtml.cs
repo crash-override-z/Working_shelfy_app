@@ -14,8 +14,11 @@ namespace ShelfyWeb.Pages
         {
             _db = db;
         }
+        
 
         public List<Order> Orders { get; private set; } = new();
+
+        
 
         public decimal TotalRevenue => Orders
             .Where(order => order.Status != "Cancelled")
@@ -34,6 +37,9 @@ namespace ShelfyWeb.Pages
         {
             await LoadOrdersAsync();
         }
+
+        
+
 
         public async Task<IActionResult> OnPostUpdateStatusAsync(int id, string status)
         {
@@ -54,12 +60,13 @@ namespace ShelfyWeb.Pages
             return RedirectToPage();
         }
 
-        private async Task LoadOrdersAsync()
-        {
-            Orders = await _db.Orders
-                .OrderByDescending(order => order.CreatedAt)
-                .ThenByDescending(order => order.Id)
-                .ToListAsync();
+       private async Task LoadOrdersAsync()
+{
+    Orders = await _db.Orders
+        .Include(order => order.Items)
+        .OrderByDescending(order => order.CreatedAt)
+        .ThenByDescending(order => order.Id)
+        .ToListAsync();
         }
     }
 }

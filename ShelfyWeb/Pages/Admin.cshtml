@@ -30,6 +30,22 @@
                             <div>Customer: @order.CustomerName</div>
                             <div>Pickup: @order.PickupSlot</div>
                             <div>Total: $@order.TotalPrice.ToString("F2")</div>
+                            <div class="mt-2">
+                                <strong>Items:</strong>
+                                @if (order.Items.Count == 0)
+                                {
+                                    <span class="text-muted">No item details saved for this order.</span>
+                                }
+                                else
+                                {
+                                    <ul class="mb-0">
+                                        @foreach (var item in order.Items)
+                                        {
+                                            <li>@item.Quantity × @item.RollName — $@item.UnitPrice.ToString("F2") each</li>
+                                        }
+                                    </ul>
+                                }
+                            </div>
                             <div>Status: <strong>@order.Status</strong></div>
                             <div class="text-muted small">
                                 Created: @order.CreatedAt.ToLocalTime().ToString("g")
