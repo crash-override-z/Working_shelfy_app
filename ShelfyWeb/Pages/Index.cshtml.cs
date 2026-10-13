@@ -52,6 +52,18 @@ public class IndexModel : PageModel
     [TempData]
     public string? ConfirmationTicketId { get; set; }
 
+    public bool IsReview { get; private set; }
+
+    public List<OrderPreviewItem> PreviewItems { get; private set; } = new();
+
+    public decimal Subtotal { get; private set; }
+
+    public decimal ReservationFee { get; private set; }
+
+    public decimal Tax { get; private set; }
+
+    public decimal Total { get; private set; }
+
     public int QuantityAt(int index) =>
         index < Quantities.Count ? Quantities[index] : 0;
 
@@ -60,9 +72,75 @@ public class IndexModel : PageModel
         Quantities = Enumerable.Repeat(0, Menu.Length).ToList();
     }
 
-    public async Task<IActionResult> OnPostAsync()
+    public IActionResult OnPost()
+    {
+        if (!ValidateOrder())
+        {
+            return Page();
+        }
+
+        BuildPreview();
+        IsReview = true;
+
+        return Page();
+    }
+
+    public IActionResult OnPostEdit()
+    {
+        IsReview = false;
+        return Page();
+    }
+
+    public async Task<IActionResult> OnPostConfirmAsync()
+    {
+        if (!ValidateOrder())
+        {
+            return Page();
+        }
+
+        BuildPreview();
+        IsReview = true;
+
+        string ticketId = Guid.NewGuid().ToString("N")[..8].ToUpperInvariant();
+
+        var order = new Order
+        {
+            TicketId = ticketId,
+            CustomerName = CustomerName,
+            PickupSlot = $"{PickupDay.ToLowerInvariant()}, {PickupTime}",
+            TotalPrice = Total,
+            IsConfirmed = true,
+            Status = "Pending",
+            CreatedAt = DateTime.UtcNow,
+            Items = PreviewItems.Select(item => new OrderItem
+            {
+                RollName = item.RollName,
+                Quantity = item.Quantity,
+                UnitPrice = item.UnitPrice
+            }).ToList()
+        };
+
+        _db.Orders.Add(order);
+
+        try
+        {
+            await _db.SaveChangesAsync();
+        }
+        catch (DbUpdateException exception)
+        {
+            _logger.LogError(exception, "Could not save order {TicketId}.", ticketId);
+            ModelState.AddModelError(string.Empty, "We could not save your order. Please try again.");
+            return Page();
+        }
+
+        ConfirmationTicketId = ticketId;
+        return RedirectToPage();
+    }
+
+    private bool ValidateOrder()
     {
         CustomerName = CustomerName?.Trim() ?? string.Empty;
+        Quantities ??= new List<int>();
 
         if (string.IsNullOrWhiteSpace(CustomerName))
         {
@@ -90,68 +168,43 @@ public class IndexModel : PageModel
             || pickupTime > new TimeOnly(20, 0)
             || pickupTime.Minute % 15 != 0)
         {
-            ModelState.AddModelError(nameof(PickupTime), "Choose a pickup time from 12:00 PM to 8:00 PM in 15-minute increments.");
+            ModelState.AddModelError(
+                nameof(PickupTime),
+                "Choose a pickup time from 12:00 PM to 8:00 PM in 15-minute increments.");
         }
 
         if (Quantities.Count != Menu.Length || Quantities.Any(quantity => quantity < 0 || quantity > 99))
         {
-            ModelState.AddModelError(nameof(Quantities), "Enter a quantity from 0 to 99 for each menu item.");
+            ModelState.AddModelError(
+                nameof(Quantities),
+                "Enter a quantity from 0 to 99 for each menu item.");
         }
         else if (!Quantities.Any(quantity => quantity > 0))
         {
             ModelState.AddModelError(nameof(Quantities), "Add at least one item to your order.");
         }
 
-        if (!ModelState.IsValid)
-        {
-            return Page();
-        }
+        return ModelState.IsValid;
+    }
 
-        List<OrderItem> items = Menu
+    private void BuildPreview()
+    {
+        PreviewItems = Menu
             .Select((roll, index) => new { roll, quantity = Quantities[index] })
             .Where(selection => selection.quantity > 0)
-            .Select(selection => new OrderItem
-            {
-                RollName = selection.roll.Name,
-                Quantity = selection.quantity,
-                UnitPrice = selection.roll.Price
-            })
+            .Select(selection => new OrderPreviewItem(
+                selection.roll.Name,
+                selection.quantity,
+                selection.roll.Price))
             .ToList();
 
-        decimal subtotal = items.Sum(item => item.UnitPrice * item.Quantity);
-        decimal reservationFee = 1.50m;
-        decimal tax = decimal.Round(subtotal * 0.05m, 2, MidpointRounding.AwayFromZero);
-        decimal total = subtotal + reservationFee + tax;
-        string ticketId = Guid.NewGuid().ToString("N")[..8].ToUpperInvariant();
-
-        var order = new Order
-        {
-            TicketId = ticketId,
-            CustomerName = CustomerName,
-            PickupSlot = $"{PickupDay.ToLowerInvariant()}, {PickupTime}",
-            TotalPrice = total,
-            IsConfirmed = true,
-            Status = "Pending",
-            CreatedAt = DateTime.UtcNow,
-            Items = items
-        };
-
-        _db.Orders.Add(order);
-
-        try
-        {
-            await _db.SaveChangesAsync();
-        }
-        catch (DbUpdateException exception)
-        {
-            _logger.LogError(exception, "Could not save order {TicketId}.", ticketId);
-            ModelState.AddModelError(string.Empty, "We could not save your order. Please try again.");
-            return Page();
-        }
-
-        ConfirmationTicketId = ticketId;
-        return RedirectToPage();
+        Subtotal = PreviewItems.Sum(item => item.UnitPrice * item.Quantity);
+        ReservationFee = 1.50m;
+        Tax = decimal.Round(Subtotal * 0.05m, 2, MidpointRounding.AwayFromZero);
+        Total = Subtotal + ReservationFee + Tax;
     }
 }
 
 public sealed record MenuRoll(string Name, decimal Price);
+
+public sealed record OrderPreviewItem(string RollName, int Quantity, decimal UnitPrice);
