@@ -8,6 +8,14 @@ builder.Services.AddDbContext<ShelfyDbContext>(options =>
 // Add services to the container.
 builder.Services.AddRazorPages();
 
+builder.Services
+.AddAuthentication("CookieAuth")
+.AddCookie("CookieAuth", options =>
+{
+    options.LoginPath = "/Login";
+    options.LogoutPath = "/Logout";
+});
+
 var app = builder.Build();
 using (var scope = app.Services.CreateScope())
 {
@@ -23,10 +31,11 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
+
 app.UseHttpsRedirection();
 
 app.UseRouting();
-
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.UseStaticFiles();

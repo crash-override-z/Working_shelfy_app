@@ -1,11 +1,14 @@
+using  Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using Shelfy.Data;
 using Shelfy.Models;
 
+
 namespace ShelfyWeb.Pages
-{
+{   
+    [Authorize(Roles = "Admin")]
     public class AdminModel : PageModel
     {
         private readonly ShelfyDbContext _db;

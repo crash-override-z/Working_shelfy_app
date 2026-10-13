@@ -1,0 +1,27 @@
+@page
+@model ShelfyWeb.Pages.LoginModel
+@{
+    ViewData["Title"] = "Admin Sign In";
+}
+
+<div class="container py-5" style="max-width: 480px;">
+    <h1 class="mb-4">Admin Sign In</h1>
+
+    @if (!string.IsNullOrEmpty(Model.ErrorMessage))
+    {
+        <div class="alert alert-danger" role="alert">
+            @Model.ErrorMessage
+        </div>
+    }
+
+    <form method="post">
+        <div class="mb-3">
+            <label asp-for="Password" class="form-label">Admin password</label>
+            <input asp-for="Password" type="password" class="form-control"
+                   autocomplete="current-password" required />
+        </div>
+
+        <button type="submit" class="btn btn-primary">Sign in</button>
+        <a asp-page="/Index" class="btn btn-outline-secondary ms-2">Back</a>
+    </form>
+</div>
