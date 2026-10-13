@@ -1,0 +1,53 @@
+@page
+@model ShelfyWeb.Pages.LookupModel
+@{
+    ViewData["Title"] = "Look Up Your Order";
+}
+
+<div class="container py-4">
+    <h1>Look Up Your Order</h1>
+    <p>Enter the confirmation number you received after placing your order.</p>
+
+    <form method="get" class="mb-4">
+        <div class="mb-3">
+            <label asp-for="TicketId" class="form-label">Confirmation number</label>
+            <input asp-for="TicketId" class="form-control" maxlength="8" />
+            <span asp-validation-for="TicketId" class="text-danger"></span>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Check order</button>
+    </form>
+
+    @if (Model.HasSearched && !ModelState.IsValid)
+    {
+        <div asp-validation-summary="All" class="alert alert-danger" role="alert"></div>
+    }
+    else if (Model.HasSearched && Model.FoundOrder == null)
+    {
+        <div class="alert alert-info" role="status">
+            We couldn't find an order with that confirmation number. Check it and try again.
+        </div>
+    }
+    else if (Model.FoundOrder is not null)
+    {
+        <div class="card">
+            <div class="card-body">
+                <h2 class="h5">Order @Model.FoundOrder.TicketId</h2>
+                <p><strong>Status:</strong> @Model.FoundOrder.Status</p>
+                <p><strong>Pickup:</strong> @Model.FoundOrder.PickupSlot</p>
+                <p><strong>Total:</strong> $@Model.FoundOrder.TotalPrice.ToString("F2")</p>
+
+                @if (Model.FoundOrder.Items.Count > 0)
+                {
+                    <h3 class="h6">Items</h3>
+                    <ul>
+                        @foreach (var item in Model.FoundOrder.Items)
+                        {
+                            <li>@item.Quantity × @item.RollName</li>
+                        }
+                    </ul>
+                }
+            </div>
+        </div>
+    }
+</div>

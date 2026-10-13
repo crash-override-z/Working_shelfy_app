@@ -57,7 +57,7 @@ namespace ShelfyWeb.Pages
             order.Status = status;
             await _db.SaveChangesAsync();
 
-            return RedirectToPage();
+            return RedirectToPage(pageName: null, pageHandler: null, routeValues: null, fragment: $"order-{id}");
         }
 
        private async Task LoadOrdersAsync()

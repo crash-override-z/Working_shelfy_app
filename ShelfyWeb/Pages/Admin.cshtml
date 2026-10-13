@@ -23,7 +23,7 @@
         <div class="list-group">
             @foreach (var order in Model.Orders)
             {
-                <div class="list-group-item mb-3">
+                <div id="order-@order.Id" class="list-group-item mb-3 order-card status-@order.Status.ToLowerInvariant()">
                     <div class="d-flex justify-content-between align-items-start flex-wrap gap-3">
                         <div>
                             <h2 class="h5 mb-1">Ticket @order.TicketId</h2>
@@ -52,10 +52,10 @@
                             </div>
                         </div>
 
-                        <form method="post" asp-page-handler="UpdateStatus" class="d-flex gap-2 align-items-center">
+                        <form method="post" asp-page-handler="UpdateStatus" class="d-flex gap-2 align-items-center" data-auto-save-status>
                             <input type="hidden" name="id" value="@order.Id" />
                             <label class="visually-hidden" for="status-@order.Id">Order status</label>
-                            <select id="status-@order.Id" name="status" class="form-select">
+                            <select id="status-@order.Id" name="status" class="form-select status-select status-@order.Status.ToLowerInvariant()">
                                 @foreach (var status in ShelfyWeb.Pages.AdminModel.StatusOptions)
                                 {
                                     <option value="@status" selected="@(order.Status == status ? "selected" : null)">
@@ -63,11 +63,26 @@
                                     </option>
                                 }
                             </select>
-                            <button type="submit" class="btn btn-primary">Save</button>
                         </form>
                     </div>
                 </div>
             }
         </div>
+
     }
 </div>
+
+@section Scripts {
+    <script>
+        document.querySelectorAll("form[data-auto-save-status] select").forEach(select => {
+            select.addEventListener("change", () => select.form.requestSubmit());
+        });
+
+        if (window.location.hash.startsWith("#order-")) {
+            const orderCard = document.getElementById(window.location.hash.slice(1));
+            if (orderCard) {
+                setTimeout(() => orderCard.scrollIntoView({ block: "start" }), 100);
+            }
+        }
+    </script>
+}

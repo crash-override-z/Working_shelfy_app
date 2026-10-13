@@ -29,3 +29,57 @@ body {
 .form-floating > .form-control-plaintext:focus::placeholder, .form-floating > .form-control:focus::placeholder {
   text-align: start;
 }
+
+.order-card {
+  border-top-width: 6px;
+}
+
+.list-group > .list-group-item + .list-group-item.order-card {
+  border-top-width: 6px;
+}
+
+.order-card.status-pending {
+  border-top-color: #ffc107;
+}
+
+.order-card.status-preparing {
+  border-top-color: #0d6efd;
+}
+
+.order-card.status-ready {
+  border-top-color: #198754;
+}
+
+.order-card.status-completed {
+  border-top-color: #6c757d;
+}
+
+.order-card.status-cancelled {
+  border-top-color: #dc3545;
+}
+
+.status-select {
+  border-width: 2px;
+  background-color: white;
+  color: #212529
+}
+
+.status-select.status-pending {
+  border-color: #ffc107;
+}
+
+.status-select.status-preparing {
+  border-color: #0d6efd;
+}
+
+.status-select.status-ready {
+  border-color: #198754;
+}
+
+.status-select.status-completed {
+  border-color: #6c757d;
+}
+.status-select.status-cancelled {
+  border-color: #dc3545;
+}
+
