@@ -1,0 +1,44 @@
+@page
+@model ShelfyWeb.Pages.CustomerLoginModel
+@{
+    ViewData["Title"] = "Customer Sign In";
+}
+
+<div class="container py-5" style="max-width: 480px;">
+    <h1 class="mb-4">Customer Sign In</h1>
+    <p class="text-muted">Sign in to place an order with your account.</p>
+
+    @if (!string.IsNullOrWhiteSpace(Model.ErrorMessage))
+    {
+        <div class="alert alert-danger" role="alert">
+            @Model.ErrorMessage
+        </div>
+    }
+
+    <div asp-validation-summary="All" class="text-danger mb-3"></div>
+
+    <form method="post">
+        <div class="mb-3">
+            <label asp-for="Input.Email" class="form-label">Email address</label>
+            <input asp-for="Input.Email" type="email" class="form-control"
+                   autocomplete="email" required />
+            <span asp-validation-for="Input.Email" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Input.Password" class="form-label">Password</label>
+            <input asp-for="Input.Password" type="password" class="form-control"
+                   autocomplete="current-password" required />
+            <span asp-validation-for="Input.Password" class="text-danger"></span>
+        </div>
+
+        <div class="form-check mb-3">
+            <input asp-for="Input.RememberMe" class="form-check-input" />
+            <label asp-for="Input.RememberMe" class="form-check-label">Remember me on this device</label>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Sign in</button>
+        <a asp-page="/Register" class="btn btn-outline-secondary ms-2">Create account</a>
+        <a asp-page="/Index" class="btn btn-link">Back to orders</a>
+    </form>
+</div>

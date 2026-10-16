@@ -1,0 +1,27 @@
+@page
+@{
+    ViewData["Title"] = "Access Denied";
+}
+
+<div class="container py-4">
+    <h1>Access denied</h1>
+    <p>Your account does not have permission to open that page.</p>
+    @if (User.IsInRole("Admin"))
+    {
+        <a asp-page="/Admin" class="btn btn-outline-primary">Admin dashboard</a>
+        <a asp-page="/Logout" asp-route-returnUrl="/CustomerLogin"
+           class="btn btn-outline-secondary">Switch to customer</a>
+    }
+    else if (User.IsInRole("Customer"))
+    {
+        <a asp-page="/MyOrders" class="btn btn-outline-primary">My orders</a>
+        <a asp-page="/Logout" asp-route-returnUrl="/Login"
+           class="btn btn-outline-secondary">Switch to admin</a>
+    }
+    else
+    {
+        <a asp-page="/Lookup" class="btn btn-outline-secondary">Look up an order</a>
+        <a asp-page="/CustomerLogin" class="btn btn-outline-primary">Customer sign in</a>
+        <a asp-page="/Login" class="btn btn-link">Admin sign in</a>
+    }
+</div>

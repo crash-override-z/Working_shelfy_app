@@ -4,9 +4,13 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using Shelfy.Data;
 using Shelfy.Models;
+using System.Security.Claims;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ShelfyWeb.Pages;
 
+
+[Authorize(Roles = "Customer")]
 public class IndexModel : PageModel
 {
     private readonly ShelfyDbContext _db;
@@ -37,8 +41,7 @@ public class IndexModel : PageModel
         "Monday", "Tuesday", "Wednesday", "Thursday", "Friday"
     };
 
-    [BindProperty]
-    public string CustomerName { get; set; } = string.Empty;
+    public string CustomerName => User.Identity?.Name ?? string.Empty;
 
     [BindProperty]
     public string PickupDay { get; set; } = string.Empty;
@@ -103,10 +106,19 @@ public class IndexModel : PageModel
 
         string ticketId = Guid.NewGuid().ToString("N")[..8].ToUpperInvariant();
 
+        if (!int.TryParse(
+        User.FindFirstValue(ClaimTypes.NameIdentifier),
+        out int customerAccountId))
+        {
+         return Forbid();
+        }
+
+
         var order = new Order
         {
             TicketId = ticketId,
             CustomerName = CustomerName,
+            CustomerAccountId = customerAccountId,
             PickupSlot = $"{PickupDay.ToLowerInvariant()}, {PickupTime}",
             TotalPrice = Total,
             IsConfirmed = true,
@@ -139,16 +151,15 @@ public class IndexModel : PageModel
 
     private bool ValidateOrder()
     {
-        CustomerName = CustomerName?.Trim() ?? string.Empty;
         Quantities ??= new List<int>();
 
         if (string.IsNullOrWhiteSpace(CustomerName))
         {
-            ModelState.AddModelError(nameof(CustomerName), "Enter your name.");
+            ModelState.AddModelError(string.Empty, "Your account name is unavailable. Sign in again and retry.");
         }
         else if (CustomerName.Length > 100)
         {
-            ModelState.AddModelError(nameof(CustomerName), "Name must be 100 characters or fewer.");
+            ModelState.AddModelError(string.Empty, "Your account name is too long to place an order.");
         }
 
         if (!PickupDays.Contains(PickupDay, StringComparer.Ordinal))

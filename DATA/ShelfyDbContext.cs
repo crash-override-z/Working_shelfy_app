@@ -14,6 +14,18 @@ namespace Shelfy.Data
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderItem> OrderItems { get; set; } 
 
+        public DbSet<CustomerAccount> CustomerAccounts { get; set; }
+
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+    base.OnModelCreating(modelBuilder);
+
+    modelBuilder.Entity<CustomerAccount>()
+        .HasIndex(account => account.Email)
+        .IsUnique();
+        }
+
         public static string GetDatabasePath()
         {
             DirectoryInfo? directory = new(AppContext.BaseDirectory);

@@ -7,13 +7,16 @@ namespace ShelfyWeb.Pages
 {
     public class LogoutModel : PageModel
     {
-        public async Task<IActionResult> OnGetAsync()
+        public async Task<IActionResult> OnGetAsync(string? returnUrl)
         {
-            // Clear the authentication cookie
             await HttpContext.SignOutAsync("CookieAuth");
 
-            // Redirect back to the home page
-            return RedirectToPage("/Index");
+            if (!string.IsNullOrWhiteSpace(returnUrl) && Url.IsLocalUrl(returnUrl))
+            {
+                return LocalRedirect(returnUrl);
+            }
+
+            return RedirectToPage("/CustomerLogin");
         }
     }
 }

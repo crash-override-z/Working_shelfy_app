@@ -17,6 +17,9 @@ namespace ShelfyWeb.Pages
         [BindProperty]
         public string Password { get; set; } = string.Empty;
 
+        [BindProperty]
+        public bool RememberMe { get; set; }
+
         public string? ErrorMessage { get; private set; }
 
         public void OnGet()
@@ -48,7 +51,13 @@ namespace ShelfyWeb.Pages
             var identity = new ClaimsIdentity(claims, "CookieAuth");
             var principal = new ClaimsPrincipal(identity);
 
-            await HttpContext.SignInAsync("CookieAuth", principal);
+            await HttpContext.SignInAsync(
+                "CookieAuth",
+                principal,
+                new AuthenticationProperties
+                {
+                    IsPersistent = RememberMe
+                });
 
             return RedirectToPage("/Admin");
         }

@@ -17,6 +17,35 @@ namespace DATA.Migrations
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "8.0.31");
 
+            modelBuilder.Entity("Shelfy.Models.CustomerAccount", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("PasswordHash")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Email")
+                        .IsUnique();
+
+                    b.ToTable("CustomerAccounts");
+                });
+
             modelBuilder.Entity("Shelfy.Models.Order", b =>
                 {
                     b.Property<int>("Id")
@@ -25,6 +54,9 @@ namespace DATA.Migrations
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("TEXT");
+
+                    b.Property<int?>("CustomerAccountId")
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("CustomerName")
                         .IsRequired()
@@ -49,6 +81,8 @@ namespace DATA.Migrations
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CustomerAccountId");
 
                     b.ToTable("Orders");
                 });
@@ -77,6 +111,15 @@ namespace DATA.Migrations
                     b.HasIndex("OrderId");
 
                     b.ToTable("OrderItems");
+                });
+
+            modelBuilder.Entity("Shelfy.Models.Order", b =>
+                {
+                    b.HasOne("Shelfy.Models.CustomerAccount", "CustomerAccount")
+                        .WithMany()
+                        .HasForeignKey("CustomerAccountId");
+
+                    b.Navigation("CustomerAccount");
                 });
 
             modelBuilder.Entity("Shelfy.Models.OrderItem", b =>

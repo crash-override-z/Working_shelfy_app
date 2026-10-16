@@ -10,6 +10,52 @@
     <link rel="stylesheet" href="~/ShelfyWeb.styles.css" asp-append-version="true" />
 </head>
 <body>
+    <header class="container py-3 border-bottom mb-3">
+        <nav class="d-flex justify-content-between align-items-center flex-wrap gap-3"
+             aria-label="Main navigation">
+            <div>
+                @if (User.IsInRole("Admin"))
+                {
+                    <a asp-page="/Admin" class="navbar-brand">Shelfy</a>
+                }
+                else if (User.IsInRole("Customer"))
+                {
+                    <a asp-page="/Index" class="navbar-brand">Shelfy</a>
+                }
+                else
+                {
+                    <a asp-page="/Lookup" class="navbar-brand">Shelfy</a>
+                }
+            </div>
+            <div class="d-flex align-items-center flex-wrap gap-2">
+                @if (User.IsInRole("Admin"))
+                {
+                    <span class="text-muted">Signed in as admin</span>
+                    <a asp-page="/Admin" class="btn btn-outline-primary">Admin dashboard</a>
+                    <a asp-page="/Logout" asp-route-returnUrl="/CustomerLogin"
+                       class="btn btn-outline-secondary">Switch to customer</a>
+                    <a asp-page="/Logout" class="btn btn-outline-secondary">Sign out</a>
+                }
+                else if (User.IsInRole("Customer"))
+                {
+                    <span class="text-muted">Signed in as @User.Identity?.Name</span>
+                    <a asp-page="/Index" class="btn btn-outline-primary">Place an order</a>
+                    <a asp-page="/MyOrders" class="btn btn-outline-primary">My orders</a>
+                    <a asp-page="/Lookup" class="btn btn-outline-secondary">Look up an order</a>
+                    <a asp-page="/Logout" asp-route-returnUrl="/Login"
+                       class="btn btn-link">Switch to admin</a>
+                    <a asp-page="/Logout" class="btn btn-outline-secondary">Sign out</a>
+                }
+                else
+                {
+                    <a asp-page="/Lookup" class="btn btn-outline-secondary">Look up an order</a>
+                    <a asp-page="/CustomerLogin" class="btn btn-outline-primary">Customer sign in</a>
+                    <a asp-page="/Register" class="btn btn-outline-secondary">Create account</a>
+                    <a asp-page="/Login" class="btn btn-link">Admin sign in</a>
+                }
+            </div>
+        </nav>
+    </header>
     <main role="main" class="shelfy-app-shell">
         @RenderBody()
     </main>

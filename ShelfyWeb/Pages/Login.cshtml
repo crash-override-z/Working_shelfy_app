@@ -21,6 +21,11 @@
                    autocomplete="current-password" required />
         </div>
 
+        <div class="form-check mb-3">
+            <input asp-for="RememberMe" class="form-check-input" />
+            <label asp-for="RememberMe" class="form-check-label">Remember me on this device</label>
+        </div>
+
         <button type="submit" class="btn btn-primary">Sign in</button>
         <a asp-page="/Index" class="btn btn-outline-secondary ms-2">Back</a>
     </form>

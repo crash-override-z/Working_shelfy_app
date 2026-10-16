@@ -1,0 +1,55 @@
+@page
+@model ShelfyWeb.Pages.MyOrdersModel
+@{
+    ViewData["Title"] = "My Orders";
+}
+
+<div class="container py-4">
+    <h1 class="mb-3">My Orders</h1>
+    <p class="text-muted">
+        Showing @Model.Orders.Count order@(Model.Orders.Count == 1 ? "" : "s"),
+        including current and past orders, newest first.
+    </p>
+
+    @if (Model.Orders.Count == 0)
+    {
+        <div class="alert alert-info" role="status">
+            You haven't placed any orders yet.
+            <a asp-page="/Index" class="alert-link">Place your first order</a>.
+        </div>
+    }
+    else
+    {
+        <div class="list-group">
+            @foreach (var order in Model.Orders)
+            {
+                <section class="list-group-item mb-3" aria-label="Order @order.TicketId">
+                    <div class="d-flex justify-content-between align-items-start flex-wrap gap-2">
+                        <div>
+                            <h2 class="h5 mb-1">Order @order.TicketId</h2>
+                            <div><strong>Status:</strong> @order.Status</div>
+                            <div><strong>Pickup:</strong> @order.PickupSlot</div>
+                            <div><strong>Total:</strong> $@order.TotalPrice.ToString("F2")</div>
+                            <div class="text-muted small">
+                                Placed: @order.CreatedAt.ToLocalTime().ToString("g")
+                            </div>
+                        </div>
+                        <a asp-page="/Lookup" asp-route-TicketId="@order.TicketId"
+                           class="btn btn-sm btn-outline-primary">Order details</a>
+                    </div>
+
+                    @if (order.Items.Count > 0)
+                    {
+                        <h3 class="h6 mt-3">Items</h3>
+                        <ul class="mb-0">
+                            @foreach (var item in order.Items)
+                            {
+                                <li>@item.Quantity × @item.RollName</li>
+                            }
+                        </ul>
+                    }
+                </section>
+            }
+        </div>
+    }
+</div>

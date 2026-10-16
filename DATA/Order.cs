@@ -10,6 +10,8 @@ namespace Shelfy.Models
         public bool IsConfirmed { get; set; }
         public string Status { get; set; } = "Pending";
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+        public int? CustomerAccountId { get; set; }
+        public CustomerAccount? CustomerAccount { get; set; }
 
         public List<OrderItem> Items { get; set; } = new();
     }
