@@ -1,0 +1,181 @@
+@page
+@{
+    ViewData["Title"] = "Home";
+}
+
+<style>
+    .shelfie-home {
+        max-width: 640px;
+        margin: 0 auto;
+        padding: 4rem 1rem;
+        text-align: center;
+    }
+
+    .shelfie-wordmark {
+        color: #211d25;
+        font-size: clamp(3rem, 12vw, 5rem);
+        font-weight: 600;
+        letter-spacing: 0.18em;
+    }
+
+    .shelfie-tagline {
+        color: #514b56;
+        font-size: 1.25rem;
+    }
+
+    .shelfie-primary {
+        border: 0;
+        border-radius: 2rem;
+        background: #514b56;
+        color: #fff;
+        font-size: 1.1rem;
+        font-weight: 600;
+        padding: 1rem 1.5rem;
+    }
+
+    .shelfie-primary:hover {
+        background: #39343d;
+        color: #fff;
+    }
+
+    .shelfie-modal .modal-content {
+        border: 0;
+        border-radius: 1.5rem;
+        background: #fff9ff;
+        box-shadow: 0 1rem 3rem rgba(35, 27, 40, 0.2);
+    }
+
+    .shelfie-modal .modal-title {
+        color: #211d25;
+        font-weight: 700;
+    }
+
+    .shelfie-modal .modal-body {
+        color: #514b56;
+    }
+
+    .shelfie-modal .btn {
+        border-radius: 1.5rem;
+        padding: 0.75rem 1rem;
+    }
+</style>
+
+
+<!-- UI__CARD#1__HERE -->
+
+<div id="restaurantCards">
+    <div class="card mb-3">
+        <div class="card-body d-flex justify-content-between align-items-center">
+            <div>
+                <h2 class="h5 mb-1">Fujiya</h2>
+                <p class="text-muted mb-0">Sushi · 0.4 miles · Updated 5 min ago</p>
+            </div>
+
+            <button class="btn btn-outline-secondary" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#fujiyaDetails" aria-expanded="false" aria-controls="fujiyaDetails">
+                Details
+            </button>
+        </div>
+
+        <div class="collapse" id="fujiyaDetails" data-bs-parent="#restaurantCards">
+            <div class="card-body pt-0">
+                <img src="/images/fujiya.jpg" class="img-fluid rounded mb-3" alt="Sushi available at Fujiya" />
+                <p>Fresh sushi available for pickup today.</p>
+                <a href="/Fuji" class="btn btn-primary">View menu</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="card mb-3">
+        <div class="card-body d-flex justify-content-between align-items-center">
+            <div>
+                <h2 class="h5 mb-1">Restaurant Two</h2>
+                <p class="text-muted mb-0">Japanese · 0.8 km · Updated 10 min ago</p>
+            </div>
+
+            <button class="btn btn-outline-secondary" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#restaurantTwoDetails" aria-expanded="false" aria-controls="restaurantTwoDetails">
+                Details
+            </button>
+        </div>
+
+        <div class="collapse" id="restaurantTwoDetails" data-bs-parent="#restaurantCards">
+            <div class="card-body pt-0">
+                <img src="/images/restaurant-two.jpg" class="img-fluid rounded mb-3"
+                     alt="Food available at Restaurant Two" />
+                <p>Fresh items available for pickup today.</p>
+                <a href="#" class="btn btn-primary">View menu</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- UI__CARD#2__HERE -->
+
+<div class="card mb-3">
+    <div class="card-body d-flex justify-content-between align-items-center">
+        <div>
+            <h2 class="h5 mb-1">Restaurant Three</h2>
+            <p class="text-muted mb-0">
+                Japanese · 0.8 km · Updated 10 min ago
+            </p>
+        </div>
+
+        <button class="btn btn-outline-secondary" type="button" data-bs-toggle="collapse"
+                data-bs-target="#restaurantThreeDetails" aria-expanded="false" aria-controls="restaurantThreeDetails">
+            Details
+        </button>
+    </div>
+
+    <div class="collapse" id="restaurantThreeDetails" data-bs-parent="#restaurantCards">
+        <div class="card-body pt-0">
+            <img src="/images/restaurant-two.jpg" class="img-fluid rounded mb-3"
+                 alt="Food available at Restaurant Three" />
+
+            <p>Fresh items available for pickup today.</p>
+            <a href="#" class="btn btn-primary">View menu</a>
+        </div>
+    </div>
+</div>
+
+<section class="shelfie-home">
+    <div class="shelfie-wordmark">SHELFY</div>
+    <p class="shelfie-tagline mt-3">Take a Shelfy. Check the shelfy.</p>
+    <p class="text-muted mb-4">
+        Real-time stock updates · Reserve orders · Snap to earn
+    </p>
+
+    <button type="button" class="btn shelfie-primary w-100" data-bs-toggle="modal" data-bs-target="#signInModal">
+        Check nearby shelves
+    </button>
+</section>
+</main>
+
+<div class="modal fade shelfie-modal" id="signInModal" tabindex="-1" aria-labelledby="signInModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header border-0 pb-0">
+                <h2 class="modal-title fs-4" id="signInModalLabel">
+                    Join the Shelfy community
+                </h2>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                </button>
+            </div>
+
+            <div class="modal-body pt-3">
+                <p>
+                    Sign in or create an account to check nearby shelves.
+                </p>
+
+                <a asp-page="/CustomerLogin" class="btn shelfie-primary w-100 mb-2">
+                    Sign in
+                </a>
+
+                <a asp-page="/Register" class="btn btn-outline-secondary w-100">
+                    Create an account
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

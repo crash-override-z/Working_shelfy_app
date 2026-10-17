@@ -46,3 +46,53 @@ button.accept-policy {
   white-space: nowrap;
   line-height: 60px;
 }
+
+.mobile-nav {
+  position: fixed;
+  z-index: 1000;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: #fff;
+  border-top: 1px solid #e5e5e5;
+}
+
+.mobile-nav-inner {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  align-items: center;
+  padding-top: 0.25rem;
+  padding-bottom: calc(0.25rem + env(safe-area-inset-bottom));
+}
+
+.mobile-nav ::deep a {
+  display: flex;
+  width: 2.75rem;
+  height: 2.75rem;
+  align-items: center;
+  justify-content: center;
+  color: #0077cc;
+  text-decoration: none;
+}
+
+.mobile-nav ::deep a:first-child {
+  justify-self: start;
+}
+
+.mobile-nav ::deep a:nth-child(2) {
+  justify-self: center;
+}
+
+.mobile-nav ::deep a:last-child {
+  justify-self: end;
+}
+
+.mobile-nav svg {
+  width: 1.5rem;
+  height: 1.5rem;
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.8;
+}

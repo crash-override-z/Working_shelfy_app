@@ -30,11 +30,12 @@
             <div class="d-flex align-items-center flex-wrap gap-2">
                 @if (User.IsInRole("Admin"))
                 {
-                    <span class="text-muted">Signed in as admin</span>
+                    
                     <a asp-page="/Admin" class="btn btn-outline-primary">Admin dashboard</a>
                     <a asp-page="/Logout" asp-route-returnUrl="/CustomerLogin"
                        class="btn btn-outline-secondary">Switch to customer</a>
                     <a asp-page="/Logout" class="btn btn-outline-secondary">Sign out</a>
+                 
                 }
                 else if (User.IsInRole("Customer"))
                 {
@@ -60,10 +61,35 @@
         @RenderBody()
     </main>
 
+    @if (User.IsInRole("Customer"))
+    {
+        <nav class="mobile-nav" aria-label="Customer navigation">
+            <div class="container mobile-nav-inner">
+                <a asp-page="/Index" aria-label="Home">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="m3 10 9-7 9 7v10a1 1 0 0 1-1 1h-6v-7h-4v7H4a1 1 0 0 1-1-1z" />
+                    </svg>
+                </a>
+                <a asp-page="/Index" aria-label="Cart">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M3 3h2l2.4 12.2a2 2 0 0 0 2 1.6h8.8a2 2 0 0 0 2-1.6L22 8H6" />
+                        <circle cx="10" cy="21" r="1" />
+                        <circle cx="18" cy="21" r="1" />
+                    </svg>
+                </a>
+                <a asp-page="/MyOrders" aria-label="Profile and my orders">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <circle cx="12" cy="8" r="4" />
+                        <path d="M4 21a8 8 0 0 1 16 0" />
+                    </svg>
+                </a>
+            </div>
+        </nav>
+    }
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
-
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

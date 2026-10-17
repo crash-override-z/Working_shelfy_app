@@ -16,6 +16,26 @@ Welcome to **Shelfy V1**! This repository contains two core components:
  cd "/Users/joshsacrey/Desktop/Shelfy V1/ShelfyWeb"
  * dotnet run 
 
+## Passwords
+### Local admin demo password
+
+The admin password is stored locally with .NET User Secrets, not in this file or in Git.
+
+From the `ShelfyWeb` folder, set or change it with:
+
+```bash
+dotnet user-secrets set "AdminPassword" "<your password>"
+
+## User secrets was initialized once for this project with: dotnet user-secrets init
+
+
+One note: ** Added initialized User Secrets, but haven’t yet confirmed the password was set or finished wiring login to read it.** Will complete those steps as we build the login.
+
+
+
+
+
+
 
 
 

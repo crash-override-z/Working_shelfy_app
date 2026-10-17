@@ -1,0 +1,87 @@
+@page
+@{
+    Layout = null;
+    ViewData["Title"] = "Shelfy";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>SHELFY</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            width: 100%;
+            min-height: 100%;
+            margin: 0;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        .splash-screen {
+            display: grid;
+            min-height: 100vh;
+            min-height: 100svh;
+            place-items: center;
+            padding: 2rem;
+            background: #fff8ff;
+            color: #08070a;
+            text-align: center;
+            text-decoration: none;
+        }
+
+        .splash-screen:focus-visible {
+            outline: 4px solid #258cfb;
+            outline-offset: -8px;
+        }
+
+        .splash-content {
+            width: 100%;
+            max-width: 42rem;
+        }
+
+        .splash-logo {
+            margin: 0;
+            font-size: clamp(3.5rem, 14vw, 6rem);
+            font-weight: 500;
+            letter-spacing: 0.16em;
+        }
+
+        .splash-tagline {
+            margin: 1rem 0 0;
+            color: #29252b;
+            font-size: clamp(1.25rem, 5vw, 2rem);
+            font-weight: 300;
+        }
+
+        .splash-description {
+            margin: 1rem 0 0;
+            color: #49434c;
+            font-size: clamp(0.9rem, 3vw, 1.25rem);
+            letter-spacing: 0.03em;
+        }
+    </style>
+</head>
+<body>
+    <a class="splash-screen"
+       href="/Home"
+       aria-label="Continue to the Shelfy home page">
+        <main class="splash-content">
+            <h1 class="splash-logo">SHELFY</h1>
+            <p class="splash-tagline">Take a Shelfy. Check the shelfy.</p>
+            <p class="splash-description">
+                Real time stock updates | Reserve orders | Snap &amp; earn
+            </p>
+        </main>
+    </a>
+</body>
+</html>
