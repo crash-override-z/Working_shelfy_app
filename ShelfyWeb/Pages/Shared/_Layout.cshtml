@@ -20,11 +20,11 @@
                 }
                 else if (User.IsInRole("Customer"))
                 {
-                    <a asp-page="/Index" class="navbar-brand">Shelfy</a>
+                    <a asp-page="/Home" class="navbar-brand">Shelfy</a>
                 }
                 else
                 {
-                    <a asp-page="/Lookup" class="navbar-brand">Shelfy</a>
+                    <a asp-page="/Home" class="navbar-brand">Shelfy</a>
                 }
             </div>
             <div class="d-flex align-items-center flex-wrap gap-2">
@@ -40,11 +40,10 @@
                 else if (User.IsInRole("Customer"))
                 {
                     <span class="text-muted">Signed in as @User.Identity?.Name</span>
-                    <a asp-page="/Index" class="btn btn-outline-primary">Place an order</a>
                     <a asp-page="/MyOrders" class="btn btn-outline-primary">My orders</a>
                     <a asp-page="/Lookup" class="btn btn-outline-secondary">Look up an order</a>
                     <a asp-page="/Logout" asp-route-returnUrl="/Login"
-                       class="btn btn-link">Switch to admin</a>
+                       class="btn btn-link">Admin Log in</a>
                     <a asp-page="/Logout" class="btn btn-outline-secondary">Sign out</a>
                 }
                 else
@@ -52,7 +51,7 @@
                     <a asp-page="/Lookup" class="btn btn-outline-secondary">Look up an order</a>
                     <a asp-page="/CustomerLogin" class="btn btn-outline-primary">Customer sign in</a>
                     <a asp-page="/Register" class="btn btn-outline-secondary">Create account</a>
-                    <a asp-page="/Login" class="btn btn-link">Admin sign in</a>
+                    <a asp-page="/Login" class="btn btn-outline-secondary">Admin sign in</a>
                 }
             </div>
         </nav>
@@ -65,7 +64,7 @@
     {
         <nav class="mobile-nav" aria-label="Customer navigation">
             <div class="container mobile-nav-inner">
-                <a asp-page="/Index" aria-label="Home">
+                <a asp-page="/Home" aria-label="Home">
                     <svg viewBox="0 0 24 24" aria-hidden="true">
                         <path d="m3 10 9-7 9 7v10a1 1 0 0 1-1 1h-6v-7h-4v7H4a1 1 0 0 1-1-1z" />
                     </svg>

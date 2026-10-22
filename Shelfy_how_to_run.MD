@@ -132,9 +132,3 @@ Your final project should represent a complete, working application that demonst
 
 Choose a project that is interesting to you and that allows you to showcase the skills you have learned during the course.
 
-- What I have done so far
-    - **Core Order Logic & Cart System:** Built a multi-item cart system (`CartItem` class) allowing users to pick multiple sushi rolls, adjust quantities, and see dynamic subtotal calculations.
-    - **Menu & Validation Rules:** Programmed a 10-item menu with precise unit pricing, weekday selection, and strict 15-minute increment validation for pickup times.
-    - **Financial Calculations:** Added automated calculations for food subtotal, a $1.50 reservation fee, 5% GST tax, and a final grand total receipt preview.
-    - **Data Persistence (CSV):** Implemented flat-file storage using `orders.csv` and unique ticket number generation (`Guid`) to save orders.
-    - **Admin View / Dashboard:** Created an admin feature that checks for the `"admin"` username to read `orders.csv`, display live customer orders, and calculate total platform revenue.
