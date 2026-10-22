@@ -1,5 +1,6 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -9,86 +10,96 @@
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/ShelfyWeb.styles.css" asp-append-version="true" />
 </head>
+
 <body>
     <header class="container py-3 border-bottom mb-3">
-        <nav class="d-flex justify-content-between align-items-center flex-wrap gap-3"
+        <nav class="navbar navbar-light bg-light justify-content-between"
              aria-label="Main navigation">
             <div>
                 @if (User.IsInRole("Admin"))
                 {
                     <a asp-page="/Admin" class="navbar-brand">Shelfy</a>
                 }
-                else if (User.IsInRole("Customer"))
-                {
-                    <a asp-page="/Home" class="navbar-brand">Shelfy</a>
-                }
                 else
                 {
                     <a asp-page="/Home" class="navbar-brand">Shelfy</a>
                 }
             </div>
-            <div class="d-flex align-items-center flex-wrap gap-2">
-                @if (User.IsInRole("Admin"))
-                {
-                    
-                    <a asp-page="/Admin" class="btn btn-outline-primary">Admin dashboard</a>
-                    <a asp-page="/Logout" asp-route-returnUrl="/CustomerLogin"
-                       class="btn btn-outline-secondary">Switch to customer</a>
-                    <a asp-page="/Logout" class="btn btn-outline-secondary">Sign out</a>
-                 
-                }
-                else if (User.IsInRole("Customer"))
-                {
-                    <span class="text-muted">Signed in as @User.Identity?.Name</span>
-                    <a asp-page="/MyOrders" class="btn btn-outline-primary">My orders</a>
-                    <a asp-page="/Lookup" class="btn btn-outline-secondary">Look up an order</a>
-                    <a asp-page="/Logout" asp-route-returnUrl="/Login"
-                       class="btn btn-link">Admin Log in</a>
-                    <a asp-page="/Logout" class="btn btn-outline-secondary">Sign out</a>
-                }
-                else
-                {
-                    <a asp-page="/Lookup" class="btn btn-outline-secondary">Look up an order</a>
-                    <a asp-page="/CustomerLogin" class="btn btn-outline-primary">Customer sign in</a>
-                    <a asp-page="/Register" class="btn btn-outline-secondary">Create account</a>
-                    <a asp-page="/Login" class="btn btn-outline-secondary">Admin sign in</a>
-                }
+
+            <div class="dropdown">
+                <button class="btn btn-outline-secondary"
+                        type="button"
+                        data-bs-toggle="dropdown"
+                        aria-expanded="false"
+                        aria-label="Open navigation menu">
+                    <svg width="24" height="24" viewBox="0 0 24 24"
+                         fill="none" stroke="currentColor" stroke-width="2"
+                         stroke-linecap="round" aria-hidden="true">
+                        <path d="M3 6h18M3 12h18M3 18h18" />
+                    </svg>
+                </button>
+
+                <ul class="dropdown-menu dropdown-menu-end">
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <li><a asp-page="/Admin" class="dropdown-item">Admin dashboard</a></li>
+                        <li><a asp-page="/Logout" asp-route-returnUrl="/CustomerLogin" class="dropdown-item">Switch to customer</a></li>
+                        <li><a asp-page="/Logout" class="dropdown-item">Sign out</a></li>
+                    }
+                    else if (User.IsInRole("Customer"))
+                    {
+                        <li><a asp-page="/MyOrders" class="dropdown-item">My orders</a></li>
+                        <li><a asp-page="/Lookup" class="dropdown-item">Look Up An Order</a></li>
+                        <li><a asp-page="/Logout" asp-route-returnUrl="/Login" class="dropdown-item">Admin Log in</a></li>
+                        <li><a asp-page="/Logout" class="dropdown-item">Sign out</a></li>
+                    }
+                    else
+                    {
+                        <li><a asp-page="/Lookup" class="dropdown-item">Look Up An Order</a></li>
+                        <li><a asp-page="/CustomerLogin" class="dropdown-item">Customer Sign In</a></li>
+                        <li><a asp-page="/Register" class="dropdown-item">Create account</a></li>
+                        <li><a asp-page="/Login" class="dropdown-item">Admin Sign In</a></li>
+                    }
+                </ul>
             </div>
         </nav>
     </header>
-    <main role="main" class="shelfy-app-shell">
-        @RenderBody()
-    </main>
 
-    @if (User.IsInRole("Customer"))
-    {
-        <nav class="mobile-nav" aria-label="Customer navigation">
-            <div class="container mobile-nav-inner">
-                <a asp-page="/Home" aria-label="Home">
-                    <svg viewBox="0 0 24 24" aria-hidden="true">
-                        <path d="m3 10 9-7 9 7v10a1 1 0 0 1-1 1h-6v-7h-4v7H4a1 1 0 0 1-1-1z" />
-                    </svg>
-                </a>
-                <a asp-page="/Index" aria-label="Cart">
-                    <svg viewBox="0 0 24 24" aria-hidden="true">
-                        <path d="M3 3h2l2.4 12.2a2 2 0 0 0 2 1.6h8.8a2 2 0 0 0 2-1.6L22 8H6" />
-                        <circle cx="10" cy="21" r="1" />
-                        <circle cx="18" cy="21" r="1" />
-                    </svg>
-                </a>
-                <a asp-page="/MyOrders" aria-label="Profile and my orders">
-                    <svg viewBox="0 0 24 24" aria-hidden="true">
-                        <circle cx="12" cy="8" r="4" />
-                        <path d="M4 21a8 8 0 0 1 16 0" />
-                    </svg>
-                </a>
-            </div>
-        </nav>
-    }
 
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
-    @await RenderSectionAsync("Scripts", required: false)
-</body>
+        <main role="main" class="shelfy-app-shell">
+            @RenderBody()
+        </main>
+
+        @if (User.IsInRole("Customer"))
+        {
+            <nav class="mobile-nav" aria-label="Customer navigation">
+                <div class="container mobile-nav-inner">
+                    <a asp-page="/Home" aria-label="Home">
+                        <svg viewBox="0 0 24 24" aria-hidden="true">
+                            <path d="m3 10 9-7 9 7v10a1 1 0 0 1-1 1h-6v-7h-4v7H4a1 1 0 0 1-1-1z" />
+                        </svg>
+                    </a>
+                    <a asp-page="/Index" aria-label="Cart">
+                        <svg viewBox="0 0 24 24" aria-hidden="true">
+                            <path d="M3 3h2l2.4 12.2a2 2 0 0 0 2 1.6h8.8a2 2 0 0 0 2-1.6L22 8H6" />
+                            <circle cx="10" cy="21" r="1" />
+                            <circle cx="18" cy="21" r="1" />
+                        </svg>
+                    </a>
+                    <a asp-page="/MyOrders" aria-label="Profile and my orders">
+                        <svg viewBox="0 0 24 24" aria-hidden="true">
+                            <circle cx="12" cy="8" r="4" />
+                            <path d="M4 21a8 8 0 0 1 16 0" />
+                        </svg>
+                    </a>
+                </div>
+            </nav>
+        }
+
+        <script src="~/lib/jquery/dist/jquery.min.js"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="~/js/site.js" asp-append-version="true"></script>
+        @await RenderSectionAsync("Scripts", required: false)
+    </body>
+
 </html>
