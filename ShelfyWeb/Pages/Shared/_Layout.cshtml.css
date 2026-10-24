@@ -96,3 +96,10 @@ button.accept-policy {
   stroke-linejoin: round;
   stroke-width: 1.8;
 }
+
+body.home-layout .nav-menu-toggle,
+body.home-layout .nav-menu-toggle:hover,
+body.home-layout .nav-menu-toggle:active,
+body.home-layout .nav-menu-toggle.show {
+  border-color: transparent;
+}

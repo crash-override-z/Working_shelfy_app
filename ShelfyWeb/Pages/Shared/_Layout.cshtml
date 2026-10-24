@@ -12,28 +12,33 @@
 </head>
 
 <body class="@(ViewData["HomePage"] is true ? "home-layout" : null)">
-    <header class="container py-3 border-bottom mb-3">
-        <nav class="navbar navbar-light bg-light justify-content-between"
+    <header class="container py-3 mb-3 @(ViewData["UseNearbyPill"] is true ? "" : "border-bottom")">
+        <nav class="navbar navbar-light justify-content-between @(ViewData["UseNearbyPill"] is true ? "nearby-top-pill" : "bg-light")"
              aria-label="Main navigation">
-            <div>
-                @if (User.IsInRole("Admin"))
-                {
-                    <a asp-page="/Admin" class="navbar-brand">Shelfy</a>
-                }
-                else
-                {
-                    <a asp-page="/Home" class="navbar-brand">Shelfy</a>
-                }
-            </div>
+
+            @if (ViewData["UseNearbyPill"] is not true)
+            {
+                <div>
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <a asp-page="/Admin" class="navbar-brand">Shelfy</a>
+                    }
+                    else
+                    {
+                        <a asp-page="/Home" class="navbar-brand">Shelfy</a>
+                    }
+                </div>
+            }
+
+            @if (ViewData["UseNearbyPill"] is true)
+            {
+                <h1 class="nearby-top-title">Nearby</h1>
+            }
 
             <div class="dropdown">
-                <button class="btn btn-outline-secondary nav-menu-toggle"
-                        type="button"
-                        data-bs-toggle="dropdown"
-                        aria-expanded="false"
-                        aria-label="Open navigation menu">
-                    <svg width="24" height="24" viewBox="0 0 24 24"
-                         fill="none" stroke="currentColor" stroke-width="2"
+                <button class="btn btn-outline-secondary nav-menu-toggle" type="button" data-bs-toggle="dropdown"
+                        aria-expanded="false" aria-label="Open navigation menu">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                          stroke-linecap="round" aria-hidden="true">
                         <path d="M3 6h18M3 12h18M3 18h18" />
                     </svg>
@@ -43,27 +48,28 @@
                     @if (User.IsInRole("Admin"))
                     {
                         <li><a asp-page="/Admin" class="dropdown-item">Admin dashboard</a></li>
-                        <li><a asp-page="/Logout" asp-route-returnUrl="/CustomerLogin" class="dropdown-item">Switch to customer</a></li>
-                        <li><a asp-page="/Logout" class="dropdown-item">Sign out</a></li>
-                    }
+                        <li><a asp-page="/Logout" asp-route-returnUrl="/CustomerLogin" class="dropdown-item">Switch to
+                            customer</a></li>
+                            <li><a asp-page="/Logout" class="dropdown-item">Sign out</a></li>
+                        }
                     else if (User.IsInRole("Customer"))
-                    {
-                        <li><a asp-page="/MyOrders" class="dropdown-item">My orders</a></li>
-                        <li><a asp-page="/Lookup" class="dropdown-item">Look Up An Order</a></li>
-                        <li><a asp-page="/Logout" asp-route-returnUrl="/Login" class="dropdown-item">Admin Log in</a></li>
-                        <li><a asp-page="/Logout" class="dropdown-item">Sign out</a></li>
-                    }
-                    else
-                    {
-                        <li><a asp-page="/Lookup" class="dropdown-item">Look Up An Order</a></li>
-                        <li><a asp-page="/CustomerLogin" class="dropdown-item">Customer Sign In</a></li>
-                        <li><a asp-page="/Register" class="dropdown-item">Create account</a></li>
-                        <li><a asp-page="/Login" class="dropdown-item">Admin Sign In</a></li>
-                    }
-                </ul>
-            </div>
-        </nav>
-    </header>
+                        {
+                            <li><a asp-page="/MyOrders" class="dropdown-item">My orders</a></li>
+                            <li><a asp-page="/Lookup" class="dropdown-item">Look Up An Order</a></li>
+                            <li><a asp-page="/Logout" asp-route-returnUrl="/Login" class="dropdown-item">Admin Log in</a></li>
+                            <li><a asp-page="/Logout" class="dropdown-item">Sign out</a></li>
+                        }
+                        else
+                        {
+                            <li><a asp-page="/Lookup" class="dropdown-item">Look Up An Order</a></li>
+                            <li><a asp-page="/CustomerLogin" class="dropdown-item">Customer Sign In</a></li>
+                            <li><a asp-page="/Register" class="dropdown-item">Create account</a></li>
+                            <li><a asp-page="/Login" class="dropdown-item">Admin Sign In</a></li>
+                        }
+                    </ul>
+                </div>
+            </nav>
+        </header>
 
 
         <main role="main" class="shelfy-app-shell">

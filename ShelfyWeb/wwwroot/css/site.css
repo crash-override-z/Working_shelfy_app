@@ -150,3 +150,45 @@ body.home-layout .shelfy-app-shell {
   color: var(--bs-secondary-color);
   background-color: transparent;
 }
+
+.nearby-top-pill {
+  position: relative;
+  min-height: 64px;
+  padding: 0.5rem 1rem;
+  border-radius: 999px;
+  background-color: #ded9e2;
+}
+
+.nearby-top-title {
+  position: absolute;
+  left: 50%;
+  margin: 0;
+  transform: translateX(-50%);
+  color: #211d25;
+  font-size: 1.25rem;
+  font-weight: 500;
+}
+
+.nearby-top-pill .dropdown {
+  position: relative;
+  z-index: 1;
+  margin-right: 0;
+  margin-left: auto;
+}
+
+.nearby-top-pill .nav-menu-toggle,
+.nearby-top-pill .nav-menu-toggle:hover,
+.nearby-top-pill .nav-menu-toggle:focus,
+.nearby-top-pill .nav-menu-toggle:focus-visible,
+.nearby-top-pill .nav-menu-toggle:active,
+.nearby-top-pill .dropdown.show > .nav-menu-toggle {
+  color: #403b44;
+  background-color: transparent;
+  border-color: transparent;
+  box-shadow: none;
+}
+
+.nearby-top-pill .nav-menu-toggle:focus-visible {
+  outline: 2px solid #403b44;
+  outline-offset: 2px;
+}
