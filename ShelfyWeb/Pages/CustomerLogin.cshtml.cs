@@ -86,6 +86,6 @@ public class CustomerLoginModel : PageModel
                 IsPersistent = Input.RememberMe
             });
 
-        return RedirectToPage("/Index");
+        return RedirectToPage("/Home");
     }
 }

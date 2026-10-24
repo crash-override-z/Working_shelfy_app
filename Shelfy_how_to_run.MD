@@ -8,6 +8,9 @@ Welcome to **Shelfy V1**! This repository contains two core components:
 
 ## 📁 Directory Navigation Commands
 
+## Boot up port to see changes
+dotnet run --urls http://0.0.0.0:5181
+
 ## Shelfy V1
  cd "/Users/joshsacrey/Desktop/Shelfy V1" && cd ShelfyWeb
  * dotnet run --project ShelfyConsole
@@ -18,6 +21,16 @@ Welcome to **Shelfy V1**! This repository contains two core components:
 
 ## Passwords
 ### Local admin demo password
+12345678
+
+## Terminal boot-up
+cd "/Users/joshsacrey/Desktop/Shelfy V1/ShelfyWeb"
+ASPNETCORE_ENVIRONMENT=Development dotnet run --no-launch-profile --urls http://0.0.0.0:5180
+
+## cloudflair
+1
+## tunnle
+cloudflared tunnel --url http://localhost:5180cloudflared tunnel --url http://localhost:5180
 
 The admin password is stored locally with .NET User Secrets, not in this file or in Git.
 

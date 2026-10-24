@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="~/ShelfyWeb.styles.css" asp-append-version="true" />
 </head>
 
-<body>
+<body class="@(ViewData["HomePage"] is true ? "home-layout" : null)">
     <header class="container py-3 border-bottom mb-3">
         <nav class="navbar navbar-light bg-light justify-content-between"
              aria-label="Main navigation">
@@ -27,7 +27,7 @@
             </div>
 
             <div class="dropdown">
-                <button class="btn btn-outline-secondary"
+                <button class="btn btn-outline-secondary nav-menu-toggle"
                         type="button"
                         data-bs-toggle="dropdown"
                         aria-expanded="false"

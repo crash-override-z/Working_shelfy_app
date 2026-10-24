@@ -28,6 +28,48 @@ body {
   margin-bottom: 60px;
 }
 
+body.home-layout {
+  min-height: 100vh;
+  margin: 0;
+  padding-bottom: 6rem;
+  display: flex;
+  flex-direction: column;
+}
+
+body.home-layout .shelfy-app-shell {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.home-page {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.home-auth-actions {
+  position: fixed;
+  z-index: 1020;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  max-width: 540px;
+  margin: 0 auto;
+  padding: 1rem 1rem calc(1rem + env(safe-area-inset-bottom));
+  background: var(--bs-body-bg);
+  border-top: 1px solid var(--bs-border-color);
+}
+
+.nav-menu-toggle,
+.nav-menu-toggle:hover,
+.nav-menu-toggle:focus,
+.nav-menu-toggle:active,
+.dropdown.show > .nav-menu-toggle {
+  color: var(--bs-secondary-color);
+  background-color: transparent;
+}
+
 .form-floating > .form-control-plaintext::placeholder, .form-floating > .form-control::placeholder {
   color: var(--bs-secondary-color);
   text-align: end;
@@ -88,4 +130,23 @@ body {
 }
 .status-select.status-cancelled {
   border-color: #dc3545;
+}
+
+.nav-menu-toggle {
+  -webkit-tap-highlight-color: transparent;
+  --bs-btn-hover-color: var(--bs-secondary-color);
+  --bs-btn-hover-bg: transparent;
+  --bs-btn-hover-border-color: var(--bs-secondary-color);
+  --bs-btn-active-color: var(--bs-secondary-color);
+  --bs-btn-active-bg: transparent;
+  --bs-btn-active-border-color: var(--bs-secondary-color);
+}
+
+.nav-menu-toggle:hover,
+.nav-menu-toggle:focus,
+.nav-menu-toggle:focus-visible,
+.nav-menu-toggle:active,
+.dropdown.show > .nav-menu-toggle {
+  color: var(--bs-secondary-color);
+  background-color: transparent;
 }

@@ -1,39 +1,36 @@
 @page
 @{
     ViewData["Title"] = "Home";
+    ViewData["HomePage"] = true;
 }
 
 <!-- Image / hero area -->
-<main class="container py-3">
-    <img src="/images/Shelfy_Logo.jpeg"
-         alt="Shelfy logo" 
-         class="d-block mx-auto mb-3"
-         style="max-width: 200px;"/>
+<main class="container py-3 home-page">
+    <img src="/images/Shelfy_Logo.jpeg" alt="Shelfy logo" class="d-block mx-auto mb-3" style="max-width: 200px;" />
 
     <!-- // TEXT // Heading and description -->
-    <h1 class="h3 mb-2 text-center">Take a Shelfy. Check the Shelfy</h1><br/>
-    <p class="text-muted mb-4 text-center">Real time stock updates | Reserve orders | Snap to earn points
-    </p>
+    <h1 class="h3 mb-2 text-center">Take a Shelfy. Check the Shelfy</h1><br />
+    <h6 class="text-muted mb-4 text-center">Real time stock updates | Reserve orders | Snap to earn points</h6>
 
-
-   <!--// BUTTONS //  -->
-    <div class="d-grid gap-5">
+    <!--// BUTTONS //  -->
+    <div class="d-grid gap-4">
         <!-- Main action buttons -->
-        <a asp-page="/NearMe" class="btn btn-outline-primary btn-lg btn-styled home-action-button rounded-pill">Check Nearby Shelves</a>
-        <button type="button" class="btn btn-outline-primary btn-lg btn-styled home-action-button rounded-pill">Snap A Shelfy</button>
+        <a asp-page="/NearMe" class="btn btn-outline-primary btn-lg btn-styled home-action-button rounded-pill">Check
+            Nearby Shelves</a>
+        <button type="button" class="btn btn-outline-primary btn-lg btn-styled home-action-button rounded-pill">Snap A
+            Shelfy</button>
     </div>
 
-<!-- Main action buttons -->
-    <div class="row g-1 mt-3">
-        <!-- Main action buttons -->
+    <div class="row g-2 home-auth-actions">
         <div class="col">
-            <button type="button" class="btn btn-outline-primary btn-lg w-100 btn-styled rounded-pill">In Stock</button>
+            <a asp-page="/CustomerLogin" class="btn btn-outline-primary btn-lg w-100 btn-styled rounded-pill">
+                Log In
+            </a>
         </div>
         <div class="col">
-            <button type="button" class="btn btn-secondary btn-lg w-100 btn-styled rounded-pill">Low Stock</button>
+            <a asp-page="/Register" class="btn btn-secondary btn-lg w-100 btn-styled rounded-pill">
+                Sign Up
+            </a>
         </div>
     </div>
-
-
-    <!-- Stock choices -->
 </main>
