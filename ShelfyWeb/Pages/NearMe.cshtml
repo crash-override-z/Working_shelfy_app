@@ -72,16 +72,16 @@
                     <h2 class="h5 mb-1">Fujiya</h2>
                     <p class="text-muted mb-0">Sushi · 0.4 miles · Updated 5 min ago</p>
                 </div>
-<!-- BUTTON --------------------------------------------------------------------------------------->
+                <!-- BUTTON --------------------------------------------------------------------------------------->
                 <button class="btn btn-outline-secondary" type="button" data-bs-toggle="collapse"
                         data-bs-target="#fujiyaDetails" aria-expanded="false" aria-controls="fujiyaDetails">
                     Details
                 </button>
             </div>
-<!-- BUTTON --------------------------------------------------------------------------------------->
+            <!-- BUTTON --------------------------------------------------------------------------------------->
             <div class="collapse" id="fujiyaDetails" data-bs-parent="#restaurantCards">
                 <div class="card-body pt-0">
-                    <img src="/images/fujiya.jpg" class="img-fluid rounded mb-3" alt="Sushi available at Fujiya" />
+                    <img src="/images/Fujiya_Roll.png" class="img-fluid rounded mb-3" alt="Sushi available at Fujiya" />
                     <p>Fresh sushi available for pickup today.</p>
                     <a asp-page="/Index" class="btn btn-primary">View menu</a>
                 </div>
@@ -94,13 +94,13 @@
                     <h2 class="h5 mb-1">Restaurant Two</h2>
                     <p class="text-muted mb-0">Japanese · 0.8 km · Updated 10 min ago</p>
                 </div>
-<!-- BUTTON IN STOCK LOW STOCK --------------------------------------------------------------------------------------->
+                <!-- BUTTON IN STOCK LOW STOCK --------------------------------------------------------------------------------------->
                 <button class="btn btn-outline-secondary" type="button" data-bs-toggle="collapse"
                         data-bs-target="#restaurantTwoDetails" aria-expanded="false" aria-controls="restaurantTwoDetails">
                     Details
                 </button>
             </div>
-<!-- // --------------------------------------------------------------------------------------->
+            <!-- // --------------------------------------------------------------------------------------->
             <div class="collapse" id="restaurantTwoDetails" data-bs-parent="#restaurantCards">
                 <div class="card-body pt-0">
                     <img src="/images/restaurant-two.jpg" class="img-fluid rounded mb-3"
@@ -140,9 +140,9 @@
         </div>
     </div>
     
-<!-- button ---------------------------------------------------------------------------------------> 
-<button type="button" class="btn btn-primary btn-sm">Small button</button>
-<button type="button" class="btn btn-secondary btn-sm">Small button</button>
+    <!-- button --------------------------------------------------------------------------------------->
+    <button type="button" class="btn btn-primary btn-sm">Small button</button>
+    <button type="button" class="btn btn-secondary btn-sm">Small button</button>
 
     <section class="shelfie-home">
         <div class="shelfie-wordmark">SHELFY</div>
@@ -150,33 +150,33 @@
         <p class="text-muted mb-4">
             Real-time stock updates · Reserve orders · Snap to earn
         </p>
-</main>
+    </main>
 
-<div class="modal fade shelfie-modal" id="signInModal" tabindex="-1" aria-labelledby="signInModalLabel"
-     aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header border-0 pb-0">
-                <h2 class="modal-title fs-4" id="signInModalLabel">
-                    Join the Shelfy community
-                </h2>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-                </button>
-            </div>
+    <div class="modal fade shelfie-modal" id="signInModal" tabindex="-1" aria-labelledby="signInModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header border-0 pb-0">
+                    <h2 class="modal-title fs-4" id="signInModalLabel">
+                        Join the Shelfy community
+                    </h2>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                    </button>
+                </div>
 
-            <div class="modal-body pt-3">
-                <p>
-                    Sign in or create an account to check nearby shelves.
-                </p>
+                <div class="modal-body pt-3">
+                    <p>
+                        Sign in or create an account to check nearby shelves.
+                    </p>
 
-                <a asp-page="/CustomerLogin" class="btn shelfie-primary w-100 mb-2">
-                    Sign in
-                </a>
+                    <a asp-page="/CustomerLogin" class="btn shelfie-primary w-100 mb-2">
+                        Sign in
+                    </a>
 
-                <a asp-page="/Register" class="btn btn-outline-secondary w-100">
-                    Create an account
-                </a>
+                    <a asp-page="/Register" class="btn btn-outline-secondary w-100">
+                        Create an account
+                    </a>
+                </div>
             </div>
         </div>
     </div>
-</div>

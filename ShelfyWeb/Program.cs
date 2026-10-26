@@ -6,7 +6,8 @@ builder.Services.AddDbContext<ShelfyDbContext>(options =>
    options.UseSqlite($"Data Source={ShelfyDbContext.GetDatabasePath()}"));
 
 // Add services to the container.
-builder.Services.AddRazorPages();
+builder.Services.AddRazorPages(options =>
+    options.Conventions.AddPageRoute("/Splash", ""));
 
 builder.Services
 .AddAuthentication("CookieAuth")

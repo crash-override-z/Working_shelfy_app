@@ -12,76 +12,102 @@
     <title>SHELFY</title>
 
     <style>
-        * {
-            box-sizing: border-box;
-        }
+       
+       * {
+    box-sizing: border-box;
+}
 
-        html,
-        body {
-            width: 100%;
-            min-height: 100%;
-            margin: 0;
-        }
+html,
+body {
+    width: 100%;
+    min-height: 100%;
+    margin: 0;
+}
 
-        body {
-            font-family: Arial, Helvetica, sans-serif;
-        }
+body {
+    font-family: Arial, Helvetica, sans-serif;
+}
 
-        .splash-screen {
-            display: grid;
-            min-height: 100vh;
-            min-height: 100svh;
-            place-items: center;
-            padding: 2rem;
-            background: #fff8ff;
-            color: #08070a;
-            text-align: center;
-            text-decoration: none;
-        }
+.splash-screen {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    min-height: 100svh;
+    padding: calc(2rem + env(safe-area-inset-top))
+             1.5rem
+             calc(1.25rem + env(safe-area-inset-bottom));
+    background: #fff8ff;
+    color: #08070a;
+    text-align: center;
 
-        .splash-screen:focus-visible {
-            outline: 4px solid #258cfb;
-            outline-offset: -8px;
-        }
+}
 
-        .splash-content {
-            width: 100%;
-            max-width: 42rem;
-        }
+.splash-content {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    max-width: 42rem;
+    margin: 0 auto;
+}
 
-        .splash-logo {
-            margin: 0;
-            font-size: clamp(3.5rem, 14vw, 6rem);
-            font-weight: 500;
-            letter-spacing: 0.16em;
-        }
+.splash-logo {
+    margin: 0;
+    font-size: clamp(3.5rem, 14vw, 6rem);
+    font-weight: 500;
+    letter-spacing: 0.16em;
+}
 
-        .splash-tagline {
-            margin: 1rem 0 0;
-            color: #29252b;
-            font-size: clamp(1.25rem, 5vw, 2rem);
-            font-weight: 300;
-        }
+.splash-tagline {
+    margin: 1rem 0 0;
+    color: #29252b;
+    font-size: clamp(1.25rem, 5vw, 2rem);
+    font-weight: 300;
+}
 
-        .splash-description {
-            margin: 1rem 0 0;
-            color: #49434c;
-            font-size: clamp(0.9rem, 3vw, 1.25rem);
-            letter-spacing: 0.03em;
-        }
+.splash-description {
+    margin: 1.5rem 0 0;
+    color: #49434c;
+    font-size: clamp(0.95rem, 3.8vw, 1.15rem);
+    line-height: 1.6;
+}
+
+.splash-start {
+    align-self: center;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 48px;
+    margin-top: 1rem;
+    padding: 0.75rem 1rem;
+    color: #49434c;
+    font-size: 1rem;
+    text-decoration: none;
+}
+
+.splash-start:focus-visible {
+    outline: 3px solid #258cfb;
+    outline-offset: 3px;
+}
     </style>
 </head>
 <body>
-    <a class="splash-screen"
-       href="/Home"
-       aria-label="Continue to the Shelfy home page">
-        <main class="splash-content">
+   <body>
+    <main class="splash-screen">
+        <section class="splash-content">
             <h1 class="splash-logo">SHELFY</h1>
             <p class="splash-tagline">Take a Shelfy. Check the shelfy.</p>
-            <p class="splash-description">
-                Real time stock updates | Reserve orders | Snap &amp; earn
+          
             </p>
-        </main>
-    </a>
+        </section>
+
+        <a class="splash-start"
+           href="/Home"
+           aria-label="Tap to start and open Shelfy">
+            Tap screen to start
+        </a>
+    </main>
+</body>
 </body>
 </html>
