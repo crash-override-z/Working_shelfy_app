@@ -6,108 +6,165 @@
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>SHELFY</title>
 
     <style>
-       
-       * {
-    box-sizing: border-box;
-}
+            * {
+                box-sizing: border-box;
+            }
 
-html,
-body {
-    width: 100%;
-    min-height: 100%;
-    margin: 0;
-}
+            html,
+            body {
+                width: 100%;
+                min-height: 100%;
+                margin: 0;
+            }
 
-body {
-    font-family: Arial, Helvetica, sans-serif;
-}
+            body {
+                font-family: Arial, Helvetica, sans-serif;
+            }
 
-.splash-screen {
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-    min-height: 100svh;
-    padding: calc(2rem + env(safe-area-inset-top))
-             1.5rem
-             calc(1.25rem + env(safe-area-inset-bottom));
-    background: #fff8ff;
-    color: #08070a;
-    text-align: center;
+            .splash-screen {
+                display: flex;
+                flex-direction: column;
+                min-height: 100vh;
+                min-height: 100svh;
+                padding: calc(2rem + env(safe-area-inset-top)) 1.5rem calc(1.25rem + env(safe-area-inset-bottom));
+                background: #fff8ff;
+                color: #08070a;
+                text-align: center;
+                text-decoration: none;
 
-}
+            }
 
-.splash-content {
-    display: flex;
-    flex: 1;
-    flex-direction: column;
-    justify-content: center;
-    width: 100%;
-    max-width: 42rem;
-    margin: 0 auto;
-}
+            .splash-content {
+                display: flex;
+                flex: 1;
+                flex-direction: column;
+                justify-content: center;
+                width: 100%;
+                max-width: 42rem;
+                margin: 0 auto;
+            }
 
-.splash-logo {
-    margin: 0;
-    font-size: clamp(3.5rem, 14vw, 6rem);
-    font-weight: 500;
-    letter-spacing: 0.16em;
-}
+            .splash-logo {
+                margin: 0;
+                font-size: clamp(3.5rem, 14vw, 6rem);
+                font-weight: 500;
+                letter-spacing: 0.16em;
+            }
 
-.splash-tagline {
-    margin: 1rem 0 0;
-    color: #29252b;
-    font-size: clamp(1.25rem, 5vw, 2rem);
-    font-weight: 300;
-}
+            .splash-tagline {
+                margin: 1rem 0 0;
+                color: #29252b;
+                font-size: clamp(1.25rem, 5vw, 2rem);
+                font-weight: 300;
+            }
 
-.splash-description {
-    margin: 1.5rem 0 0;
-    color: #49434c;
-    font-size: clamp(0.95rem, 3.8vw, 1.15rem);
-    line-height: 1.6;
-}
+            .splash-description {
+                margin: 1.5rem 0 0;
+                color: #49434c;
+                font-size: clamp(0.95rem, 3.8vw, 1.15rem);
+                line-height: 1.6;
+            }
 
-.splash-start {
-    align-self: center;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 48px;
-    margin-top: 1rem;
-    padding: 0.75rem 1rem;
-    color: #49434c;
-    font-size: 1rem;
-    text-decoration: none;
-}
+            .splash-start {
+                align-self: center;
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                min-height: 48px;
+                margin-top: 1rem;
+                padding: 0.75rem 1rem;
+                color: #49434c;
+                font-size: 1rem;
+                text-decoration: none;
+            }
 
-.splash-start:focus-visible {
-    outline: 3px solid #258cfb;
-    outline-offset: 3px;
-}
+            .splash-start:focus-visible {
+                outline: 3px solid #258cfb;
+                outline-offset: 3px;
+            }
+
+            .splash-logo span {
+                display: inline-block;
+                opacity: 0;
+                animation: letter-pop 700ms both;
+            }
+
+            .splash-logo span:nth-child(1) {
+                animation-delay: 0ms;
+            }
+
+            .splash-logo span:nth-child(2) {
+                animation-delay: 90ms;
+            }
+
+            .splash-logo span:nth-child(3) {
+                animation-delay: 180ms;
+            }
+
+            .splash-logo span:nth-child(4) {
+                animation-delay: 270ms;
+            }
+
+            .splash-logo span:nth-child(5) {
+                animation-delay: 360ms;
+            }
+
+            .splash-logo span:nth-child(6) {
+                animation-delay: 450ms;
+            }
+
+            @@keyframes letter-pop {
+                0% {
+                    opacity: 0;
+                    transform: translateY(24px) scale(0.7);
+                }
+
+                65% {
+                    opacity: 1;
+                    transform: translateY(-7px) scale(1.12);
+                }
+
+                82% {
+                    transform: translateY(3px) scale(0.96);
+                }
+
+                100% {
+                    opacity: 1;
+                    transform: translateY(0) scale(1);
+                }
+            }
+
+            @@media (prefers-reduced-motion: reduce) {
+                .splash-logo span {
+                    opacity: 1;
+                    animation: none;
+                }
+            }
     </style>
 </head>
-<body>
-   <body>
-    <main class="splash-screen">
-        <section class="splash-content">
-            <h1 class="splash-logo">SHELFY</h1>
-            <p class="splash-tagline">Take a Shelfy. Check the shelfy.</p>
-          
-            </p>
-        </section>
 
-        <a class="splash-start"
-           href="/Home"
-           aria-label="Tap to start and open Shelfy">
-            Tap screen to start
-        </a>
-    </main>
+<body>
+
+    <a class="splash-screen" href="/Home" aria-label="Tap anywhere to start Shelfy">
+        <main class="splash-content">
+            <h1 class="splash-logo" aria-label="Shelfy">
+                <span aria-hidden="true">S</span><span aria-hidden="true">H</span><span aria-hidden="true">E</span><span
+                aria-hidden="true">L</span><span aria-hidden="true">F</span><span aria-hidden="true">Y</span>
+            </h1>
+            <p class="splash-tagline">Take a Shelfy. Check the shelfy.</p>
+        </main>
+
+        <span class="splash-start" aria-hidden="true">
+            Tap anywhere to start
+        </span>
+    </a>
 </body>
-</body>
+
 </html>

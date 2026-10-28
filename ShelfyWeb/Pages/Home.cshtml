@@ -15,22 +15,25 @@
     <!--// BUTTONS //  -->
     <div class="d-grid gap-4">
         <!-- Main action buttons -->
-        <a asp-page="/NearMe" class="btn btn-outline-primary btn-lg btn-styled home-action-button rounded-pill">Check
-            Nearby Shelves</a>
+        <a asp-page="/NearMe" class="btn btn-primary btn-lg btn-styled home-action-button rounded-pill">
+            Check Nearby Shelves
+        </a>
+
+
         <button type="button" class="btn btn-outline-primary btn-lg btn-styled home-action-button rounded-pill">Snap a
             Shelfy</button>
-    </div>
+        </div>
 
-    <div class="row g-2 home-auth-actions">
-        <div class="col">
-            <a asp-page="/CustomerLogin" class="btn btn-outline-primary btn-lg w-100 btn-styled rounded-pill">
-                Log In
-            </a>
+        <div class="row g-2 home-auth-actions">
+            <div class="col">
+                <a asp-page="/CustomerLogin" class="btn btn-outline-primary btn-lg w-100 btn-styled rounded-pill">
+                    Log In
+                </a>
+            </div>
+            <div class="col">
+                <a asp-page="/Register" class="btn btn-outline-primary btn-lg w-100 btn-styled rounded-pill signup-button">
+                    Sign Up
+                </a>
+            </div>
         </div>
-        <div class="col">
-            <a asp-page="/Register" class="btn btn-secondary btn-lg w-100 btn-styled rounded-pill">
-                Sign Up
-            </a>
-        </div>
-    </div>
-</main>
+    </main>

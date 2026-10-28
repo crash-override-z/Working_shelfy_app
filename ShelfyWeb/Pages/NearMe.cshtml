@@ -62,7 +62,7 @@
 </style>
 
 
-<!-- UI__CARD#1__HERE -->
+<!-- UI__CARD#1 -->
 <main class="container py-3">
 
     <div id="restaurantCards">
@@ -72,16 +72,16 @@
                     <h2 class="h5 mb-1">Fujiya</h2>
                     <p class="text-muted mb-0">Sushi · 0.4 miles · Updated 5 min ago</p>
                 </div>
-                <!-- BUTTON --------------------------------------------------------------------------------------->
+                <!-- BUTTON --->
                 <button class="btn btn-outline-secondary" type="button" data-bs-toggle="collapse"
                         data-bs-target="#fujiyaDetails" aria-expanded="false" aria-controls="fujiyaDetails">
                     Details
                 </button>
             </div>
-            <!-- BUTTON --------------------------------------------------------------------------------------->
+            <!-- BUTTON -->
             <div class="collapse" id="fujiyaDetails" data-bs-parent="#restaurantCards">
                 <div class="card-body pt-0">
-                    <img src="/images/Fujiya_Roll.png" class="img-fluid rounded mb-3" alt="Sushi available at Fujiya" />
+                    <img src="/images/Fujiya.png" class="img-fluid rounded mb-3" alt="Sushi available at Fujiya" />
                     <p>Fresh sushi available for pickup today.</p>
                     <a asp-page="/Index" class="btn btn-primary">View menu</a>
                 </div>
@@ -91,8 +91,11 @@
         <div class="card mb-3">
             <div class="card-body d-flex justify-content-between align-items-center">
                 <div>
-                    <h2 class="h5 mb-1">Restaurant Two</h2>
-                    <p class="text-muted mb-0">Japanese · 0.8 km · Updated 10 min ago</p>
+
+
+                     <!-- UI__CARD#2. // -->
+                    <h2 class="h5 mb-1">Goodside Bakery</h2>
+                    <p class="text-muted mb-0">Bakery · 0.9 km · Updated 10 min ago</p>
                 </div>
                 <!-- BUTTON IN STOCK LOW STOCK --------------------------------------------------------------------------------------->
                 <button class="btn btn-outline-secondary" type="button" data-bs-toggle="collapse"
@@ -100,26 +103,26 @@
                     Details
                 </button>
             </div>
-            <!-- // --------------------------------------------------------------------------------------->
+            
             <div class="collapse" id="restaurantTwoDetails" data-bs-parent="#restaurantCards">
                 <div class="card-body pt-0">
-                    <img src="/images/restaurant-two.jpg" class="img-fluid rounded mb-3"
-                         alt="Food available at Restaurant Two" />
-                    <p>Fresh items available for pickup today.</p>
+                    <img src="/images/GoodSide_bakery.png" class="img-fluid rounded mb-3"
+                         alt="Food available at Goodside Bakery" />
+                    <p>Pastry and bread available for pickup today.</p>
                     <a href="#" class="btn btn-primary">View menu</a>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- UI__CARD#2__HERE -->
+    <!-- UI__CARD#3. ///-->
 
     <div class="card mb-3">
         <div class="card-body d-flex justify-content-between align-items-center">
             <div>
-                <h2 class="h5 mb-1">Restaurant Three</h2>
+                <h2 class="h5 mb-1">Chef on the Run</h2>
                 <p class="text-muted mb-0">
-                    Japanese · 0.8 km · Updated 10 min ago
+                    Premade Home cooked meals · 1.3 km · Updated 12 min ago
                 </p>
             </div>
 
@@ -131,19 +134,105 @@
 
         <div class="collapse" id="restaurantThreeDetails" data-bs-parent="#restaurantCards">
             <div class="card-body pt-0">
-                <img src="/images/restaurant-two.jpg" class="img-fluid rounded mb-3"
-                     alt="Food available at Restaurant Three" />
+                <img src="/images/Chef_Ontherun.png" class="img-fluid rounded mb-3"
+                     alt="Food available at Chef on the Run" />
 
-                <p>Fresh items available for pickup today.</p>
+                <p>Multiple pre-made meals available for pickup today.</p>
+                <a href="#" class="btn btn-primary">View menu</a>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- UI__CARD#4 . ////-->
+
+    <div class="card mb-3">
+        <div class="card-body d-flex justify-content-between align-items-center">
+            <div>
+                <h2 class="h5 mb-1">Red Barn Market</h2>
+                <p class="text-muted mb-0">
+                    Hearty sandwhiches and salads · 1.7 km · Updated 15 min ago
+                </p>
+            </div>
+
+            <button class="btn btn-outline-secondary" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#restaurantFourDetails" aria-expanded="false" aria-controls="restaurantFourDetails">
+                Details
+            </button>
+        </div>
+
+        <div class="collapse" id="restaurantFourDetails" data-bs-parent="#restaurantCards">
+            <div class="card-body pt-0">
+                <img src="/images/Red_Barn_Market.png" class="img-fluid rounded mb-3"
+                     alt="Food available at Red Barn Market" />
+
+                <p>Multiple items available for pickup today.</p>
+                <a href="#" class="btn btn-primary">View menu</a>
+            </div>
+        </div>
+    </div>
+
+      <!-- UI__CARD#5 . /////-->
+
+    <div class="card mb-3">
+        <div class="card-body d-flex justify-content-between align-items-center">
+            <div>
+                <h2 class="h5 mb-1">Refire Kitchen</h2>
+                <p class="text-muted mb-0">
+                    Premade Home cooked meals 2.2 km · Updated 20 min ago
+                </p>
+            </div>
+
+            <button class="btn btn-outline-secondary" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#restaurantFiveDetails" aria-expanded="false" aria-controls="restaurantFiveDetails">
+                Details
+            </button>
+        </div>
+
+        <div class="collapse" id="restaurantFiveDetails" data-bs-parent="#restaurantCards">
+            <div class="card-body pt-0">
+                <img src="/images/Refire_Kitchen.png" class="img-fluid rounded mb-3"
+                     alt="Food available at Refire Kitchen" />
+
+                <p>Multiple pre-made meals available for pickup today.</p>
+                <a href="#" class="btn btn-primary">View menu</a>
+            </div>
+        </div>
+    </div>
+
+     <!-- UI__CARD#6 . //////-->
+
+    <div class="card mb-3">
+        <div class="card-body d-flex justify-content-between align-items-center">
+            <div>
+                <h2 class="h5 mb-1">Working Bread</h2>
+                <p class="text-muted mb-0">
+                    Baked goods · 2.5 km · Updated 22 min ago
+                </p>
+            </div>
+
+            <button class="btn btn-outline-secondary" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#restaurantSixDetails" aria-expanded="false" aria-controls="restaurantSixDetails">
+                Details
+            </button>
+        </div>
+
+        <div class="collapse" id="restaurantSixDetails" data-bs-parent="#restaurantCards">
+            <div class="card-body pt-0">
+                <img src="/images/Working_Bread.png" class="img-fluid rounded mb-3"
+                     alt="Food available at Working Bread" />
+
+                <p>Multiple baked goods available for pickup today.</p>
                 <a href="#" class="btn btn-primary">View menu</a>
             </div>
         </div>
     </div>
     
-    <!-- button --------------------------------------------------------------------------------------->
+    <!-- button -->
     <button type="button" class="btn btn-primary btn-sm">Small button</button>
     <button type="button" class="btn btn-secondary btn-sm">Small button</button>
-
+    
+  
     <section class="shelfie-home">
         <div class="shelfie-wordmark">SHELFY</div>
         <p class="shelfie-tagline mt-3">Take a Shelfy. Check the shelfy.</p>

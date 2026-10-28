@@ -192,3 +192,60 @@ body.home-layout .shelfy-app-shell {
   outline: 2px solid #403b44;
   outline-offset: 2px;
 }
+
+.nearby-top-pill {
+  background-color: #0d6efd;
+}
+
+.nearby-top-pill .nearby-top-title {
+  color: #fff;
+}
+
+.nearby-top-pill .nav-menu-toggle,
+.nearby-top-pill .nav-menu-toggle:hover,
+.nearby-top-pill .nav-menu-toggle:focus,
+.nearby-top-pill .nav-menu-toggle:focus-visible,
+.nearby-top-pill .nav-menu-toggle:active,
+.nearby-top-pill .dropdown.show > .nav-menu-toggle {
+  color: #fff;
+  background-color: transparent;
+  border-color: transparent;
+  box-shadow: none;
+}
+
+.nearby-top-pill .nav-menu-toggle:focus-visible {
+  outline-color: #fff;
+}
+
+body.home-layout header .navbar {
+  padding: 0.75rem 1rem;
+  border-radius: 0.75rem;
+  background-color: #0d6efd !important;
+}
+
+body.home-layout header .navbar-brand {
+  color: #fff;
+}
+
+body.home-layout header .nav-menu-toggle,
+body.home-layout header .nav-menu-toggle:hover,
+body.home-layout header .nav-menu-toggle:focus,
+body.home-layout header .nav-menu-toggle:active,
+body.home-layout header .dropdown.show > .nav-menu-toggle {
+  color: #fff;
+  background-color: transparent;
+  border-color: transparent;
+  box-shadow: none;
+}
+
+body.home-layout header .nav-menu-toggle:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 3px;
+}
+
+.home-auth-actions .signup-button {
+  border-width: 1.5px;
+  background-color: #4c93ff;
+  color: #fff;
+  border:none;
+}

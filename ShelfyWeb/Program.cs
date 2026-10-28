@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Shelfy.Data;
+using ShelfyWeb;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<ShelfyDbContext>(options =>
@@ -25,8 +26,20 @@ using (var scope = app.Services.CreateScope())
 {
     var db = scope.ServiceProvider.GetRequiredService<ShelfyDbContext>();
     db.Database.EnsureCreated();
-}
 
+    if (app.Environment.IsDevelopment())
+    {
+        var demoPassword = app.Configuration["DemoCustomerPassword"];
+
+        if (string.IsNullOrWhiteSpace(demoPassword))
+        {
+            throw new InvalidOperationException(
+                "Set the DemoCustomerPassword user secret before starting the demo.");
+        }
+
+        DemoCustomerSeeder.Seed(db, demoPassword);
+    }
+}
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
